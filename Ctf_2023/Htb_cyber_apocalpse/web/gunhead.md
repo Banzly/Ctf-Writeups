@@ -10,30 +10,49 @@ Dalam tantangan ini, kita dapat mengunduh file yang disediakan:
 Tapi sebelum kita melihat kode sumbernya, mari bermain dengan aplikasinya.
 
 Status:
+
+
 ![image](https://user-images.githubusercontent.com/113104087/230796394-a5810d3b-b6aa-427c-baa5-15d1bd247e52.png)
+
+
 
 Ini akan menunjukkan status "Integer".
 
 Kebutuhan :
+
+
 ![image](https://user-images.githubusercontent.com/113104087/230796408-79619d12-829d-478d-ba34-32fd9d5655e8.png)
+
 
 Tunjukkan apa yang dibutuhkan "Integer".
 
 Perintah:
 
+
 ![image](https://user-images.githubusercontent.com/113104087/230796422-595ebea0-ba78-4ce9-bfe3-e07c94d3da5e.png)
+
 
 Oh! Sepertinya kita bisa menjalankan beberapa perintah?
 Ayo ketik `/help` :
+
+
 ![image](https://user-images.githubusercontent.com/113104087/230796434-ef8f46e7-bc1d-4086-98ff-f19b52eb12a8.png)
 
+
+
 ![image](https://user-images.githubusercontent.com/113104087/230796438-2a9c8085-9abf-4da7-b924-16383c75da41.png)
+
+
 
 Dingin! Kita dapat `/clear` command prompt, `/ping` [device IP] untuk mengecek sistem pengintaian, `/storage` untuk mengecek penyimpanan.
 
 Hmm… Saya bisa mencium beberapa injeksi perintah OS !
 Mari kita lihat kode sumbernya!
+
+
 ![image](https://user-images.githubusercontent.com/113104087/230796469-15050c6f-3abc-4fd1-aa41-d62393c023a6.png)
+
+
 Struktur aplikasi web menggunakan model yang disebut MVC, atau Model-View-Controller .
 
 Di dalam `controllers/ReconController.php`, ada `ping()`metode:
@@ -92,15 +111,25 @@ Karena itu, kita bisa mendapatkan RCE melalui `/ping` perintah!
 EKSPLOITASI
 ```
 Sekarang, mari kita coba ping 127.0.0.1, atau localhost:
+
+
 ![image](https://user-images.githubusercontent.com/113104087/230796579-eede959b-a938-451c-a2f0-db90d34327b3.png)
+
+
 Riwayat HTTP Burp Suite:
+
+
 ![image](https://user-images.githubusercontent.com/113104087/230796589-35578118-4f38-4c84-ae03-9902199c73dd.png)
+
 
 Saat kita mengetik perintah itu, itu akan mengirimkan permintaan POST ke `/api/ping`, dengan badan JSON.
 Jika tidak ada kesalahan, itu memberi kami data JSON, yang merupakan keluaran perintah.
 Berbekal informasi di atas, kami dapat mengirimkan permintaan itu ke Repeater Burp Suite, dan menyuntikkan beberapa perintah!!
 Setelah beberapa pengujian `||` bekerja!
+
+
 ![image](https://user-images.githubusercontent.com/113104087/230796630-6efbc144-c3a3-43f2-813b-2eb6e1b3d0f0.png)
+
 
 Bagus! Sekarang kami dapat mengonfirmasi bahwa ada kerentanan RCE melalui shell_exec!
 Ayo baca bendera!
@@ -109,7 +138,11 @@ Ayo baca bendera!
     "ip":" || cat ../flag.txt"
 }
 ```
+
+
 ![image](https://user-images.githubusercontent.com/113104087/230796660-602e4716-0efc-4668-af53-30cb00f6e85f.png)
+
+
 
 Atau, bisa mendapatkan shell :D
 
