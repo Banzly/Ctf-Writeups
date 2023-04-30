@@ -34,7 +34,8 @@ chunk(a, 30)
 ```
 output : `['7e08250c4aaa9ed206fd7c9e398e2}', 'actf{cl1ent_s1de_sucks_544e67e', 'f12024523398ee02fe7517fffa9251', '6317199e454f4d2bdb04d9e419ccc7']`
 
-swap(chunk(a, 30))
+`swap(chunk(a, 30))`
+
 chunk dan swap adalah fungsi-fungsi yang tidak didefinisikan di dalam kode yang Anda berikan. Namun,
 chunk digunakan untuk memecah string atau array menjadi potongan-potongan yang lebih kecil, 
 sedangkan swap digunakan untuk menukar posisi elemen-elemen dalam suatu array atau string.
@@ -44,7 +45,8 @@ dan kemudian potongan-potongan ini diproses dengan fungsi swap.
 ```
 ['6317199e454f4d2bdb04d9e419ccc7', '7e08250c4aaa9ed206fd7c9e398e2}', 'f12024523398ee02fe7517fffa9251', 'actf{cl1ent_s1de_sucks_544e67e']
 ```
-swap(swap(chunk(a, 30))).join("")
+`swap(swap(chunk(a, 30))).join("")`
+
 Fungsi ini `chunk()`digunakan untuk membagi string menjadi array substring dengan panjang tertentu. 
 Dalam hal ini, dibutuhkan string adan membaginya menjadi array substring, yang masing-masing panjangnya `30 karakter`.
 Fungsi `swap()`tidak didefinisikan dalam kode yang Anda berikan, tetapi dengan asumsi itu hanya membalikkan urutan elemen dalam array, 
